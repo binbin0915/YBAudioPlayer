@@ -13,17 +13,18 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.xwrl.mvvm.demo.BaseActivity;
 import com.xwrl.mvvm.demo.R;
 import com.xwrl.mvvm.demo.adapter.MusicAdapter;
+import com.xwrl.mvvm.demo.bean.MediaDirItem;
 import com.xwrl.mvvm.demo.databinding.ActivityMusicBinding;
 import com.xwrl.mvvm.demo.util.ImmersiveStatusBarUtil;
 import com.xwrl.mvvm.demo.viewmodel.MusicViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 
@@ -40,6 +41,7 @@ public class MusicActivity extends BaseActivity<MusicViewModel>{
     private MusicViewModel mMusicViewModel;
     private MusicAdapter mMusicAdapter;
     private MyAdapterItemClickListener mItemClickListener;
+    public  static MediaDirItem mediaDirItem;
 
     private Timer mTimer;
 
@@ -121,8 +123,18 @@ public class MusicActivity extends BaseActivity<MusicViewModel>{
             super.onChildrenLoaded(parentId, children);
 
             Log.d(TAG, "onChildrenLoaded: ");
-            mMusicAdapter.setItems(children);
-            activityOnChildrenLoad(mMusicViewModel, mMusicBinding.mainActivityIvPlayLoading, children);
+
+            List<MediaItem> childrenFilter = new ArrayList<>();
+            children.forEach(item->{
+                if(item.getDescription().getMediaUri().getPath().contains(mediaDirItem.getPath())){
+                    childrenFilter.add(item);
+                }
+
+
+            });
+
+            mMusicAdapter.setItems(childrenFilter);
+            activityOnChildrenLoad(mMusicViewModel, mMusicBinding.mainActivityIvPlayLoading, childrenFilter);
         }
 
         @Override

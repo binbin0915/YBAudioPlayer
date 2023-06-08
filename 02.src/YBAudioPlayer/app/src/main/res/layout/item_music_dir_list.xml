@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--@Target(APi 21[5.0])-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!--数据-->
+    <data>
+        <variable
+            name="MusicInfoDir"
+            type="com.xwrl.mvvm.demo.bean.MusicDirBean" />
+    </data>
+    
+    <!--布局-->
+    <RelativeLayout
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_music_list_layout"
+        android:background="?android:selectableItemBackground">
+
+        <TextView
+            android:id="@+id/item_local_music_number"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text='@{MusicInfoDir.id}'
+            android:textSize="13sp"
+            android:gravity="center"
+            android:textColor="@color/color99White"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"/>
+        <TextView
+            android:id="@+id/item_local_music_song"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{MusicInfoDir.title}"
+            android:textSize="13sp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/item_local_music_number"
+            android:layout_alignParentEnd="true"
+            android:singleLine="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="80dp"/>
+
+        
+    </RelativeLayout>
+
+</layout>

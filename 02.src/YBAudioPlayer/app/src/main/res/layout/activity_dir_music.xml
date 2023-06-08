@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="musicInfo"
+            type="com.xwrl.mvvm.demo.viewmodel.MusicDirViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/music_activity_ui_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_sea">
+
+        <ImageView
+            android:id="@+id/music_activity_iv_return"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="6dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:contentDescription="@string/label_Activity_return"
+            android:padding="7dp"
+            android:rotation="90"
+            android:src="@drawable/iv_return"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/music_activity_top_tv_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/label_default_local_dir"
+            android:textColor="@color/colorWhite"
+            android:textSize="19sp"
+            tools:viewBindingIgnore="true"
+            android:visibility="@{musicInfo.showSearchView? View.INVISIBLE : View.VISIBLE,default=visible}"
+            app:layout_constraintBottom_toBottomOf="@id/music_activity_iv_return"
+            app:layout_constraintStart_toEndOf="@id/music_activity_iv_return"
+            app:layout_constraintTop_toTopOf="@id/music_activity_iv_return" />
+
+        <EditText
+            android:id="@+id/music_activity_top_edit"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:autofillHints=" "
+            android:background="@color/color01Black"
+            android:gravity="center_vertical"
+            android:hint="@string/label_MusicActivity_search_music"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/color99White"
+            android:textCursorDrawable="@drawable/my_cursor_drawable"
+            android:textSize="16sp"
+            android:focusable="auto"
+            android:focusableInTouchMode="true"
+            android:visibility="@{musicInfo.showSearchView? View.VISIBLE : View.GONE,default=gone}"
+            app:layout_constraintBottom_toBottomOf="@id/music_activity_iv_return"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/music_activity_iv_return"
+            app:layout_constraintTop_toTopOf="@id/music_activity_iv_return"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:id="@+id/music_activity_top_edit_line"
+            android:src="@color/colorNightDrawableBlack"
+            tools:viewBindingIgnore="true"
+            android:visibility="@{musicInfo.showSearchView? View.VISIBLE : View.GONE,default=gone}"
+            app:layout_constraintTop_toBottomOf="@id/music_activity_top_edit"
+            app:layout_constraintStart_toStartOf="@id/music_activity_top_edit"
+            app:layout_constraintEnd_toEndOf="@id/music_activity_iv_search"
+            android:contentDescription="@string/label_MusicActivity_search_music"/>
+
+        <ImageView
+            android:id="@+id/music_activity_iv_search"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:contentDescription="@string/label_MusicActivity_search"
+            android:padding="8dp"
+            android:src="@drawable/iv_search"
+            android:visibility="@{musicInfo.showSearchView? View.INVISIBLE : View.VISIBLE,default=visible}"
+            app:layout_constraintTop_toTopOf="@id/music_activity_iv_return"
+            app:layout_constraintBottom_toBottomOf="@id/music_activity_iv_return"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/music_activity_rv_search_music"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:visibility="@{musicInfo.showSearchView? View.VISIBLE : View.GONE,default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/music_activity_iv_return"
+            tools:listitem="@layout/item_music_dir_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/music_activity_rv_music"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="0dp"
+            android:visibility="@{musicInfo.showSearchView? View.INVISIBLE : View.VISIBLE,default=visible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/music_activity_iv_return"
+            tools:listitem="@layout/item_music_dir_list" />
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

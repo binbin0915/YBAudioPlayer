@@ -12,6 +12,7 @@
     <string name="label_default_empty_RecycleView">¿请问谁居住在深海的大菠萝里？</string>
     <string name="label_default_unknown">Unknown</string>
     <string name="label_default_local">本地音乐</string>
+    <string name="label_default_local_dir">本地音乐目录</string>
     <string name="label_default_comment">评论</string>
     <string name="label_default_comment_area">评论区</string>
     <string name="label_default_comment_hottest">最热</string>

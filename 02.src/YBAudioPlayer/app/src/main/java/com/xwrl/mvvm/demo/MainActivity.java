@@ -21,6 +21,7 @@ import com.xwrl.mvvm.demo.service.MusicService;
 import com.xwrl.mvvm.demo.util.PermissionUtil;
 import com.xwrl.mvvm.demo.util.PictureUtil;
 import com.xwrl.mvvm.demo.view.MusicActivity;
+import com.xwrl.mvvm.demo.view.MusicDirActivity;
 import com.xwrl.mvvm.demo.view.SongLrcActivity;
 import com.xwrl.mvvm.demo.viewmodel.MusicViewModel;
 
@@ -162,7 +163,7 @@ public class MainActivity extends BaseActivity<MusicViewModel> {
 
 
         mMainBinding.activityMainGridLayout.setOnClickListener(v ->
-                startActivity(new Intent(MainActivity.this, MusicActivity.class))
+                startActivity(new Intent(MainActivity.this, MusicDirActivity.class))
         );
         mMainBinding.mainActivityBottomLayout.setOnClickListener(v -> {
                 startActivity(new Intent(MainActivity.this, SongLrcActivity.class));
