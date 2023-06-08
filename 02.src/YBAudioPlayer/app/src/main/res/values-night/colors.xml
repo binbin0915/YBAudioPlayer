@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorNightBlack">#EEEEEE</color>
+    <color name="colorNightDrawableBlack">#bfbfbf</color>
+    <color name="colorNightWhite">#bfbfbf</color>
+    <color name="colorNightPlayerSeekBarProgress">#aaa</color>
+    <color name="colorNightPlayerSeekBarSecond">#888</color>
+    <color name="colorNightViewBlack">#CDCDCD</color>
+    <color name="colorNightGroundBlack">#60A39D9D</color>
+    <color name="colorNightSearchBlack">#60A39C9C</color>
+    <color name="colorNightBrown">#311111</color>
+</resources>

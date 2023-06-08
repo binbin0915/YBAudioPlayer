@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion '30.0.2'
+
+    defaultConfig {
+        applicationId "com.xwrl.mvvm.demo"
+        minSdkVersion 26
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                //这里修改apk文件名
+                outputFileName = "${authorName()}_v${defaultConfig.versionName}_${releaseTime()}.apk"
+            }
+    }
+
+    buildTypes {
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false" //不显示log
+            minifyEnabled true
+            shrinkResources true   //自动删除不使用的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main{
+            res.srcDirs += [
+                    'src/main/res/layout',
+                    'src/main/res/ui_player_control',
+                    'src/main/res/ui_song_lrc',
+                    'src/main/res'
+            ]
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'jp.wasabeef:glide-transformations:2.0.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}
+
+// 当前beta版本号
+ext.build_number = "beta1"
+
+// 显示的时间格式，形如20211203
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getDefault())
+}
+// 显示的时间格式，形如20211203
+static def authorName() {
+    return "喜闻人籁"
+}

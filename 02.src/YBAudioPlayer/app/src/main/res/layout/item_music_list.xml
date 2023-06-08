@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--@Target(APi 21[5.0])-->
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!--数据-->
+    <data>
+        <variable
+            name="MusicInfo"
+            type="com.xwrl.mvvm.demo.bean.MusicBean" />
+    </data>
+    
+    <!--布局-->
+    <RelativeLayout
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/item_music_list_layout"
+        android:background="?android:selectableItemBackground">
+
+        <TextView
+            android:id="@+id/item_local_music_number"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text='@{MusicInfo.id}'
+            android:textSize="13sp"
+            android:gravity="center"
+            android:textColor="@color/color99White"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="0dp"/>
+        <TextView
+            android:id="@+id/item_local_music_song"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{MusicInfo.title}"
+            android:textSize="13sp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/item_local_music_number"
+            android:layout_alignParentEnd="true"
+            android:singleLine="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="80dp"/>
+        <TextView
+            android:id="@+id/item_local_music_singer_and_album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{MusicInfo.artist+" - "+MusicInfo.album}'
+            android:textSize="11sp"
+            android:layout_below="@id/item_local_music_song"
+            android:layout_alignStart="@id/item_local_music_song"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:textColor="@color/colorWhite"
+            android:layout_marginEnd="80dp" />
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/item_local_music_more"
+            android:src="@drawable/iv_style_leaf_more"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="13dp"
+            android:padding="5dp"
+            android:contentDescription="@string/label_item_more"
+            android:background="?android:selectableItemBackgroundBorderless"/>
+        
+    </RelativeLayout>
+
+</layout>

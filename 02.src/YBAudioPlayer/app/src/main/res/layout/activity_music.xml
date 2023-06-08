@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="musicInfo"
+            type="com.xwrl.mvvm.demo.viewmodel.MusicViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/music_activity_ui_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_sea">
+
+        <ImageView
+            android:id="@+id/music_activity_iv_return"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="6dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:contentDescription="@string/label_Activity_return"
+            android:padding="7dp"
+            android:rotation="90"
+            android:src="@drawable/iv_return"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/music_activity_top_tv_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/label_default_local"
+            android:textColor="@color/colorWhite"
+            android:textSize="19sp"
+            tools:viewBindingIgnore="true"
+            android:visibility="@{musicInfo.showSearchView? View.INVISIBLE : View.VISIBLE,default=visible}"
+            app:layout_constraintBottom_toBottomOf="@id/music_activity_iv_return"
+            app:layout_constraintStart_toEndOf="@id/music_activity_iv_return"
+            app:layout_constraintTop_toTopOf="@id/music_activity_iv_return" />
+
+        <EditText
+            android:id="@+id/music_activity_top_edit"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:autofillHints=" "
+            android:background="@color/color01Black"
+            android:gravity="center_vertical"
+            android:hint="@string/label_MusicActivity_search_music"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/color99White"
+            android:textCursorDrawable="@drawable/my_cursor_drawable"
+            android:textSize="16sp"
+            android:focusable="auto"
+            android:focusableInTouchMode="true"
+            android:visibility="@{musicInfo.showSearchView? View.VISIBLE : View.GONE,default=gone}"
+            app:layout_constraintBottom_toBottomOf="@id/music_activity_iv_return"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/music_activity_iv_return"
+            app:layout_constraintTop_toTopOf="@id/music_activity_iv_return"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0.5dp"
+            android:id="@+id/music_activity_top_edit_line"
+            android:src="@color/colorNightDrawableBlack"
+            tools:viewBindingIgnore="true"
+            android:visibility="@{musicInfo.showSearchView? View.VISIBLE : View.GONE,default=gone}"
+            app:layout_constraintTop_toBottomOf="@id/music_activity_top_edit"
+            app:layout_constraintStart_toStartOf="@id/music_activity_top_edit"
+            app:layout_constraintEnd_toEndOf="@id/music_activity_iv_search"
+            android:contentDescription="@string/label_MusicActivity_search_music"/>
+
+        <ImageView
+            android:id="@+id/music_activity_iv_search"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:contentDescription="@string/label_MusicActivity_search"
+            android:padding="8dp"
+            android:src="@drawable/iv_search"
+            android:visibility="@{musicInfo.showSearchView? View.INVISIBLE : View.VISIBLE,default=visible}"
+            app:layout_constraintTop_toTopOf="@id/music_activity_iv_return"
+            app:layout_constraintBottom_toBottomOf="@id/music_activity_iv_return"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="10dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/music_activity_rv_search_music"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="48dp"
+            android:visibility="@{musicInfo.showSearchView? View.VISIBLE : View.GONE,default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/music_activity_iv_return"
+            tools:listitem="@layout/item_music_list" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/music_activity_rv_music"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="48dp"
+            android:visibility="@{musicInfo.showSearchView? View.INVISIBLE : View.VISIBLE,default=visible}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/music_activity_iv_return"
+            tools:listitem="@layout/item_music_list" />
+
+        <!--底部播放控制模块分割线-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_activity_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:animateLayoutChanges="true"
+            android:background="@color/colorDarkBlue"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingStart="10dp"
+            android:paddingEnd="0dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/main_activity_bottom_iv_list"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:contentDescription="@string/label_Activity_list"
+                android:padding="5dp"
+                android:src="@drawable/iv_list"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias=".97"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias=".3" />
+
+            <com.xwrl.mvvm.demo.custom.CircleProgressBar
+                android:id="@+id/main_activity_bottom_progress_bar"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="12dp"
+                app:layout_constraintBottom_toBottomOf="@id/main_activity_bottom_iv_list"
+                app:layout_constraintEnd_toStartOf="@id/main_activity_bottom_iv_list"
+                app:layout_constraintTop_toTopOf="@id/main_activity_bottom_iv_list"
+                app:max="@{musicInfo.max,default=100}"
+                app:progress="@{musicInfo.progress,default=10}"
+                android:background="?android:selectableItemBackgroundBorderless"/>
+
+            <ImageView
+                android:id="@+id/main_activity_bottom_iv_play"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:contentDescription="@string/label_Activity_toggle"
+                android:padding="0dp"
+                android:src="@{musicInfo.playbackResId,default=@drawable/iv_main_play}"
+                app:layout_constraintBottom_toBottomOf="@id/main_activity_bottom_progress_bar"
+                app:layout_constraintEnd_toEndOf="@id/main_activity_bottom_progress_bar"
+                app:layout_constraintStart_toStartOf="@id/main_activity_bottom_progress_bar"
+                app:layout_constraintTop_toTopOf="@id/main_activity_bottom_progress_bar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/main_activity_bottom_progress_bar_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/color99White"
+            android:contentDescription="@string/label_Activity_line"
+            tools:viewBindingIgnore="true"
+            app:layout_constraintBottom_toTopOf="@id/main_activity_bottom_layout" />
+
+        <ImageView
+            android:id="@+id/main_activity_bottom_iv_album"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="10dp"
+            android:background="@{musicInfo.record,default=@drawable/iv_record_128}"
+            android:contentDescription="@string/label_Activity_mask"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/main_activity_iv_play_loading"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:contentDescription="@string/label_Activity_loading"
+            android:src="@drawable/iv_play_loading"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/main_activity_bottom_iv_album"
+            app:layout_constraintEnd_toEndOf="@id/main_activity_bottom_iv_album"
+            app:layout_constraintStart_toStartOf="@id/main_activity_bottom_iv_album"
+            app:layout_constraintTop_toTopOf="@id/main_activity_bottom_iv_album" />
+
+        <!--ellipsize: 文本超过限制则给滚动显示,字体颜色由Html文字显示-->
+        <TextView
+            android:id="@+id/main_activity_bottom_tv_song"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@{musicInfo.playbackInfo,default=@string/label_default_artist}"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@id/main_activity_bottom_iv_album"
+            app:layout_constraintStart_toEndOf="@id/main_activity_bottom_iv_album"
+            app:layout_constraintTop_toTopOf="@id/main_activity_bottom_layout"
+            app:layout_constraintWidth_percent=".54"
+            tools:viewBindingIgnore="true"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
