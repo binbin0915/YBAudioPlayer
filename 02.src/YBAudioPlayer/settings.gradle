@@ -1,2 +1,2 @@
-rootProject.name = "Demo"
+rootProject.name = "YBAudioPlayer"
 include ':app'

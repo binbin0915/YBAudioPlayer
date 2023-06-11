@@ -43,6 +43,16 @@ public class LastMetaManager {
         return get().getInt("MusicPosition",0);
     }
 
+    public void saveLastDir(String lastDir){
+            SharedPreferences.Editor editor = get().edit();
+            editor.putString("MusicDir",lastDir);
+            editor.apply();
+    }
+    public String getLastDir(){
+        return get().getString("MusicDir","");
+    }
+
+
     public int getLastPlaybackMode(int defaultMode){
         return get().getInt("MusicPlaybackMode", defaultMode);
     }

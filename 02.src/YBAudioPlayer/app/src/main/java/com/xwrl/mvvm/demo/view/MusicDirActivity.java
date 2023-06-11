@@ -20,6 +20,7 @@ import com.xwrl.mvvm.demo.adapter.MusicDirAdapter;
 
 import com.xwrl.mvvm.demo.bean.MediaDirItem;
 import com.xwrl.mvvm.demo.databinding.ActivityDirMusicBinding;
+import com.xwrl.mvvm.demo.service.manager.LastMetaManager;
 import com.xwrl.mvvm.demo.viewmodel.MusicDirViewModel;
 
 
@@ -76,6 +77,8 @@ public class MusicDirActivity extends BaseDirActivity<MusicDirViewModel> {
         public void ItemClickListener(MusicDirAdapter adapter, int position) {
 //            adapter.getItems().get(position)
             MusicActivity.mediaDirItem = adapter.getItems().get(position);
+            LastMetaManager mLastMetaManager = new LastMetaManager(getApplication());
+            mLastMetaManager.saveLastDir(adapter.getItems().get(position).getPath());
             startActivity(new Intent(MusicDirActivity.this, MusicActivity.class));
 
         }

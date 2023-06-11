@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.xwrl.mvvm.demo.databinding.ActivityMainBinding;
 import com.xwrl.mvvm.demo.service.BaseMusicService;
 import com.xwrl.mvvm.demo.service.MusicService;
+import com.xwrl.mvvm.demo.service.manager.LastMetaManager;
 import com.xwrl.mvvm.demo.util.PermissionUtil;
 import com.xwrl.mvvm.demo.util.PictureUtil;
 import com.xwrl.mvvm.demo.view.MusicActivity;
@@ -25,7 +26,9 @@ import com.xwrl.mvvm.demo.view.MusicDirActivity;
 import com.xwrl.mvvm.demo.view.SongLrcActivity;
 import com.xwrl.mvvm.demo.viewmodel.MusicViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 
 public class MainActivity extends BaseActivity<MusicViewModel> {
@@ -116,11 +119,27 @@ public class MainActivity extends BaseActivity<MusicViewModel> {
     private class MyMediaBrowserSubscriptionCallback extends MediaBrowserCompat.SubscriptionCallback{
         @Override
         public void onChildrenLoaded(@NonNull String parentId,
-                                     @NonNull List<MediaBrowserCompat.MediaItem> children) {
-            super.onChildrenLoaded(parentId, children);
+                                     @NonNull List<MediaBrowserCompat.MediaItem> childrenBefore) {
+            List<MediaBrowserCompat.MediaItem> children= new ArrayList<MediaBrowserCompat.MediaItem>();
+            LastMetaManager mLastMetaManager = new LastMetaManager(getApplication());
+            String dirLast = mLastMetaManager.getLastDir();
+            if(dirLast.isEmpty()){
+                children=childrenBefore;
+            }else{
+                List<MediaBrowserCompat.MediaItem> finalChildren = children;
+                childrenBefore.forEach(item->{
+                    if(Objects.requireNonNull(item.getDescription().getMediaUri()).getPath().contains(dirLast)){
+                        finalChildren.add(item);
+                    }
+                });
+                children = finalChildren;
+            }
+
+
+            super.onChildrenLoaded(parentId, childrenBefore);
             activityOnChildrenLoad(mMusicViewModel,
                                     mMainBinding.mainActivityIvPlayLoading,
-                                    children);
+                    childrenBefore);
             mMusicViewModel.setPhoneRefresh(mRefreshRateMax);
             //！！！少更新样式状态
             mMusicViewModel.setCustomStyle(MediaControllerCompat.getMediaController(MainActivity.this)
